@@ -4,7 +4,7 @@ from OpenGL.GLU import *
 
 def display():
     glClear(GL_COLOR_BUFFER_BIT)
-    glColor3f(0,0,0)
+    glColor3f(1.0,0.0,0.0)
     
     glBegin(GL_TRIANGLES)
     glVertex2f(2,1)
@@ -14,23 +14,28 @@ def display():
     glEnd()
     glFlush()
 def init():
-    #clearcolor, matrixmode(projection/modelview), loadidentity, ortho, glutInit,  glutInitDisplayMode,glutMainLoop,windowSize, windowPosition, createWindow, displayFunc
-    glClearColor(0,0,0,0)
+    glClearColor(1,1,1,1)
     glMatrixMode(GL_PROJECTION)
     glLoadIdentity()
     glOrtho(0,10,0,10,-1,1)
     glMatrixMode(GL_MODELVIEW)
     glLoadIdentity()
+    
+
+def main():
     glutInit()
     glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB)
+    
     glutInitWindowSize(500, 500)
+    glutInitWindowPosition(50, 50)
     
+    glutCreateWindow(b"Triangular")
     
-    
-    
-def main():
+    init()
+    glutDisplayFunc(display)
+    glutMainLoop()
 
-if__name__=="__main__":
+if __name__=="__main__":
     main()
     
 
