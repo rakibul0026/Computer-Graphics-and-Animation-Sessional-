@@ -6,108 +6,133 @@ from OpenGL.GLU import *
 
 def display():
 
-    # Clear screen
     glClear(GL_COLOR_BUFFER_BIT)
 
-    # =================================
-    # 1. House Body (Red Rectangle)
-    # =================================
-
-    glColor3f(0.85, 0.05, 0.0)
-
+    # Main roof (Gray)
     glBegin(GL_QUADS)
-
-    glVertex2f(45, 55)
-    glVertex2f(665, 55)
-    glVertex2f(665, 405)
-    glVertex2f(45, 405)
-
+    glColor3f(0.30, 0.39, 0.48)
+    glVertex2f(223, 506)
+    glVertex2f(668, 506)
+    glVertex2f(779, 356)
+    glVertex2f(334, 356)
     glEnd()
 
-    # =================================
-    # 2. Roof (Dark Blue Triangle)
-    # =================================
+    # Main house body (Dark Blue)
+    glBegin(GL_QUADS)
+    glColor3f(0.09, 0.19, 0.29)
+    glVertex2f(334, 100)
+    glVertex2f(779, 100)
+    glVertex2f(779, 356)
+    glVertex2f(334, 356)
+    glEnd()
 
-    glColor3f(0.0, 0.12, 0.38)
+    # Left house body (Dark Teal)
+    glBegin(GL_QUADS)
+    glColor3f(0.08, 0.30, 0.29)
+    glVertex2f(112, 100)
+    glVertex2f(334, 100)
+    glVertex2f(334, 356)
+    glVertex2f(112, 356)
+    glEnd()
 
+    # Left triangular roof (Purple)
     glBegin(GL_TRIANGLES)
-
-    glVertex2f(45, 405)
-    glVertex2f(355, 585)
-    glVertex2f(665, 405)
-
+    glColor3f(0.62, 0.0, 0.85)
+    glVertex2f(112, 356)
+    glVertex2f(334, 356)
+    glVertex2f(223, 506)
     glEnd()
 
-    # =================================
-    # 3. Door (Green Rectangle)
-    # =================================
-
-    glColor3f(0.0, 0.60, 0.30)
-
+    # Door
     glBegin(GL_QUADS)
-
-    glVertex2f(252, 55)
-    glVertex2f(458, 55)
-    glVertex2f(458, 315)
-    glVertex2f(252, 315)
-
+    glColor3f(0.48, 0.19, 0.37)
+    glVertex2f(168, 100)
+    glVertex2f(279, 100)
+    glVertex2f(279, 250)
+    glVertex2f(168, 250)
     glEnd()
 
-    # =================================
-    # 4. Left Window
-    # =================================
-
-    glColor3f(0.0, 0.60, 0.30)
-
+    # Left Window
     glBegin(GL_QUADS)
-
-    glVertex2f(101, 158)
-    glVertex2f(198, 158)
-    glVertex2f(198, 256)
-    glVertex2f(101, 256)
-
+    glColor3f(0.0, 0.38, 0.0)
+    glVertex2f(368, 230)
+    glVertex2f(501, 230)
+    glVertex2f(501, 320)
+    glVertex2f(368, 320)
     glEnd()
 
-    # =================================
-    # 5. Right Window
-    # =================================
-
+    # Left Window - Vertical bar
     glBegin(GL_QUADS)
-
-    glVertex2f(512, 158)
-    glVertex2f(610, 158)
-    glVertex2f(610, 256)
-    glVertex2f(512, 256)
-
+    glColor3f(0.65, 0.25, 0.55)
+    glVertex2f(430, 230)
+    glVertex2f(438, 230)
+    glVertex2f(438, 320)
+    glVertex2f(430, 320)
     glEnd()
 
-    # Display
+    # Left Window - Horizontal bar
+    glBegin(GL_QUADS)
+    glColor3f(0.65, 0.25, 0.55)
+    glVertex2f(368, 269)
+    glVertex2f(501, 269)
+    glVertex2f(501, 277)
+    glVertex2f(368, 277)
+    glEnd()
+
+    # Right Window
+    glBegin(GL_QUADS)
+    glColor3f(0.20, 0.40, 0.32)
+    glVertex2f(590, 230)
+    glVertex2f(723, 230)
+    glVertex2f(723, 320)
+    glVertex2f(590, 320)
+    glEnd()
+
+    # Right Window - Vertical bar
+    glBegin(GL_QUADS)
+    glColor3f(0.0, 0.65, 0.45)
+    glVertex2f(654, 230)
+    glVertex2f(660, 230)
+    glVertex2f(660, 320)
+    glVertex2f(654, 320)
+    glEnd()
+
+    # Right Window - Horizontal bar
+    glBegin(GL_QUADS)
+    glColor3f(0.0, 0.65, 0.45)
+    glVertex2f(590, 273)
+    glVertex2f(723, 273)
+    glVertex2f(723, 279)
+    glVertex2f(590, 279)
+    glEnd()
+
     glFlush()
 
 
 def init():
 
-    # White background
-    glClearColor(1.0, 1.0, 1.0, 1.0)
+    # Background color - Green
+    glClearColor(0.16, 0.60, 0.0, 1.0)
 
-    # Set projection
+    # Projection settings
     glMatrixMode(GL_PROJECTION)
     glLoadIdentity()
 
-    gluOrtho2D(0, 800, 0, 650)
+    gluOrtho2D(0, 1000, 0, 600)
+
+    glMatrixMode(GL_MODELVIEW)
+    glLoadIdentity()
 
 
 def main():
 
     glutInit()
-
     glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB)
 
-    glutInitWindowSize(772, 625)
-
+    glutInitWindowSize(1000, 600)
     glutInitWindowPosition(100, 100)
 
-    glutCreateWindow(b"House Drawing")
+    glutCreateWindow(b"House Design")
 
     init()
 
