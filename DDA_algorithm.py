@@ -1,9 +1,8 @@
 
+#(10,10) and (80,60)
+from OpenGL.GLU import *
 from OpenGL.GL import *
 from OpenGL.GLUT import *
-from OpenGL.GLU import *
-
-x1, y1, x2, y2 = 0, 0, 0, 0
 
 
 def display():
@@ -11,6 +10,7 @@ def display():
     glClear(GL_COLOR_BUFFER_BIT)
 
     glColor3f(1.0, 0.0, 0.0)
+
     glPointSize(2.0)
 
     glBegin(GL_POINTS)
@@ -21,9 +21,10 @@ def display():
     steps = max(abs(dx), abs(dy))
 
     if steps == 0:
-        glVertex2f(x1 / 100, y1 / 100)
+        glVertex2f(x1/100, y1/100)
 
     else:
+
         x_inc = dx / steps
         y_inc = dy / steps
 
@@ -32,9 +33,9 @@ def display():
 
         for i in range(steps + 1):
 
-            print(f"{x:.2f} {y:.2f}")
+            print(f"{x:.2f}, {y:.2f}")
 
-            glVertex2f(x / 100, y / 100)
+            glVertex2f(x/100, y/100)
 
             x = x + x_inc
             y = y + y_inc
@@ -59,11 +60,13 @@ def init():
 
 def main():
 
-    global x1, y1, x2, y2
+    global x1, x2, y1, y2
 
-    x1, y1 = map(int, input("Enter first point: ").split())
+    x1 = int(input("Enter x1: "))
+    y1 = int(input("Enter y1: "))
 
-    x2, y2 = map(int, input("Enter second point: ").split())
+    x2 = int(input("Enter x2: "))
+    y2 = int(input("Enter y2: "))
 
     glutInit()
 
