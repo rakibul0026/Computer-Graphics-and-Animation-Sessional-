@@ -3,85 +3,89 @@ from OpenGL.GL import *
 from OpenGL.GLUT import *
 from OpenGL.GLU import *
 
-
-# Window size
-WIDTH = 600
-HEIGHT = 600
+x1, y1, x2, y2 = 0, 0, 0, 0
 
 
-# Bresenham Line Drawing Algorithm
-def bresenham(x1, y1, x2, y2):
-
-    dx = abs(x2 - x1)
-    dy = abs(y2 - y1)
-
-    # Determine direction
-    sx = 1 if x1 < x2 else -1
-    sy = 1 if y1 < y2 else -1
-
-    err = dx - dy
-
-    glBegin(GL_POINTS)
-
-    while True:
-
-        # Draw pixel
-        glVertex2i(x1, y1)
-
-        if x1 == x2 and y1 == y2:
-            break
-
-        e2 = 2 * err
-
-        if e2 > -dy:
-            err -= dy
-            x1 += sx
-
-        if e2 < dx:
-            err += dx
-            y1 += sy
-
-    glEnd()
-
-
-# Display Function
 def display():
 
     glClear(GL_COLOR_BUFFER_BIT)
 
-    # Set line color (White)
-    glColor3f(1.0, 1.0, 1.0)
+    glColor3f(0.0, 1.0, 0.0)
 
-    # Draw line from (100, 100) to (400, 300)
-    bresenham(100, 100, 400, 300)
+    glPointSize(2.0)
+
+    glBegin(GL_POINTS)
+
+    dx = x2 - x1
+    dy = y2 - y1
+
+    p = (2 * dy) - dx
+
+    i = x1
+    j = y1
+
+    while i <= x2 and j <= y2:
+
+        if p >= 0:
+
+            i = i + 1
+            j = j + 1
+
+            if i > x2 or j > y2:
+                break
+
+            print(f"{i:.2f} {j:.2f}")
+
+            glVertex2f(i / 100, j / 100)
+
+            p = p + (2 * dy) - (2 * dx)
+
+        elif p < 0:
+
+            i = i + 1
+
+            if i > x2 or j > y2:
+                break
+
+            print(f"{i:.2f} {j:.2f}")
+
+            glVertex2f(i / 100, j / 100)
+
+            p = p + (2 * dy)
+
+    glEnd()
 
     glFlush()
 
 
-# Initialization Function
 def init():
 
-    glClearColor(0.0, 0.0, 0.0, 1.0)
-
-    glColor3f(1.0, 1.0, 1.0)
-
-    glPointSize(3.0)
+    glClearColor(0.0, 0.0, 0.0, 0.0)
 
     glMatrixMode(GL_PROJECTION)
-
     glLoadIdentity()
 
-    gluOrtho2D(0, WIDTH, 0, HEIGHT)
+    glOrtho(0.0, 1.0, 0.0, 1.0, -1.0, 1.0)
+
+    glMatrixMode(GL_MODELVIEW)
+    glLoadIdentity()
 
 
-# Main Function
 def main():
+
+    global x1, y1, x2, y2
+
+    print("Enter first point:")
+    x1, y1 = map(int, input().split())
+
+    print("Enter second point:")
+    x2, y2 = map(int, input().split())
 
     glutInit()
 
     glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB)
 
-    glutInitWindowSize(WIDTH, HEIGHT)
+    glutInitWindowSize(500, 500)
 
     glutInitWindowPosition(100, 100)
 
